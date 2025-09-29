@@ -1,74 +1,188 @@
-<!DOCTYPE html>
+<!doctype html>
+
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Билет: Кайрат – Реал Мадрид</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Электронный билет — Кайрат vs Реал Мадрид</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f9;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+    :root{
+      --bg:#f6f8fb; --panel:#ffffff; --accent:#0a2463; --muted:#6b7280; --green:#4CAF50;
+      --card-radius:14px; --shadow:0 8px 20px rgba(12,30,70,0.08);
     }
-    .ticket {
-      background: white;
-      padding: 20px 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      max-width: 500px;
-      width: 100%;
-      text-align: center;
-    }
-    .teams {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-    .teams img {
-      width: 80px;
-      height: 80px;
-      object-fit: contain;
-    }
-    h1 {
-      font-size: 1.5rem;
-      margin: 10px 0;
-    }
-    .info {
-      margin: 15px 0;
-      font-size: 1rem;
-      color: #333;
-      line-height: 1.6;
-    }
-    .status {
-      margin-top: 20px;
-      font-size: 1.8rem;
-      font-weight: bold;
-      color: green;
-    }
+    html,body{height:100%;margin:0;font-family:Inter, Roboto, Arial, sans-serif;background:linear-gradient(180deg,#eef3fb 0%,var(--bg) 100%);color:#111}
+    .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:28px}
+    .ticket{width:980px;max-width:96%;background:var(--panel);border-radius:var(--card-radius);box-shadow:var(--shadow);overflow:hidden;display:grid;grid-template-columns:420px 1fr}
+
+  /* left column */
+  .left{background:linear-gradient(90deg,#fff 0%,#f8fbff 100%);padding:26px;display:flex;flex-direction:column;align-items:center}
+  .club-logos{display:flex;align-items:center;gap:18px;width:100%;justify-content:space-between}
+  .logo{display:flex;flex-direction:column;align-items:center;gap:8px}
+  .logo .mark{width:84px;height:84px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .logo.kairat .mark{background:#ffd05b}
+  .logo.real .mark{background:#fff;border:2px solid #e6e9ef}
+
+  .logo .mark img{max-width:90%;max-height:90%}
+
+  .match-title{text-align:center;margin-top:8px;font-size:20px;font-weight:700;color:var(--accent)}
+  .match-sub{font-size:13px;color:var(--muted);margin-top:6px}
+
+  /* QR area */
+  .qr-wrap{margin-top:18px;display:flex;flex-direction:column;align-items:center;gap:14px}
+  .qr{width:300px;height:300px;background:#fff;display:flex;align-items:center;justify-content:center;border:1px solid #eee;padding:8px}
+  .qr img{max-width:100%;max-height:100%}
+  .ticket-id{font-size:13px;color:#666}
+
+  /* right column */
+  .right{padding:28px 30px 34px 30px;display:flex;flex-direction:column;justify-content:space-between}
+  .meta{display:flex;flex-direction:column;gap:12px}
+  .row{display:flex;align-items:center;gap:12px}
+  .label{min-width:120px;color:var(--muted);font-size:13px}
+  .value{font-weight:700;color:#111;font-size:16px}
+
+  .seat{display:flex;gap:18px;align-items:center;margin-top:6px}
+  .seat .pill{background:#fff;border:1px solid #eef2f7;padding:10px 14px;border-radius:10px;box-shadow:0 4px 12px rgba(12,30,70,0.03)}
+  .seat .num{font-size:18px;font-weight:800;color:var(--accent)}
+
+  .status-wrap{display:flex;align-items:center;gap:18px;margin-top:24px}
+  .status-badge{background:linear-gradient(180deg,var(--green),#3da24a);color:white;padding:18px 26px;border-radius:14px;font-weight:800;font-size:26px;box-shadow:0 6px 18px rgba(76,175,80,0.22)}
+  .status-desc{color:var(--muted);font-size:14px}
+
+  .footer{margin-top:22px;color:var(--muted);font-size:13px}
+
+  /* small screens */
+  @media(max-width:760px){
+    .ticket{grid-template-columns:1fr;}
+    .left{order:2}
+    .right{order:1}
+    .qr{width:240px;height:240px}
+  }
+
+  /* print */
+  @media print{
+    body{background:white}
+    .wrap{padding:0}
+    .ticket{box-shadow:none}
+  }
   </style>
 </head>
 <body>
-  <div class="ticket">
-    <div class="teams">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/FCKairat_logo.png/500px-FCKairat_logo.png" alt="ФК Кайрат">
-      <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" alt="Реал Мадрид">
+  <div class="wrap">
+    <article class="ticket" role="article" aria-label="Electronic ticket">
+
+  <!-- LEFT: visual + QR -->
+  <section class="left">
+    <div class="club-logos" aria-hidden>
+      <div class="logo kairat">
+        <div class="mark">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/FCKairat_logo.png/500px-FCKairat_logo.png" alt="ФК Кайрат">
+        </div>
+        <div style="font-size:12px;color:var(--muted)">ФК «Кайрат»</div>
+      </div>
+
+      <div style="text-align:center;flex:1">
+        <div style="font-size:13px;color:var(--muted);text-transform:uppercase">Матч</div>
+        <div class="match-title">Кайрат — Реал Мадрид</div>
+        <div class="match-sub">Центральный стадион, Алматы</div>
+      </div>
+
+      <div class="logo real">
+        <div class="mark">
+          <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" alt="ФК Реал Мадрид">
+        </div>
+        <div style="font-size:12px;color:var(--muted)">ФК «Реал Мадрид»</div>
+      </div>
     </div>
-    <h1>ФК «Кайрат» – ФК «Реал Мадрид»</h1>
-    <div class="info">
-      Сектор: <b>21-север</b><br>
-      Ряд: <b>5</b>, Место: <b>15</b><br>
-      Тип билета: <b>Обычные</b><br>
-      Дата: <b>2025-09-30</b><br>
-      Время: <b>21:45</b><br>
-      Стадион: <b>Центральный стадион, Алматы</b>
+
+    <div class="qr-wrap">
+      <div class="qr" id="qrContainer">
+        <img id="qrImage" alt="QR ticket" src="" />
+      </div>
+      <div class="ticket-id" id="ticketId">Ticket ID: <strong id="tid">TCK-KRM-21N-05-15-20250930</strong></div>
     </div>
-    <div class="status">VALID ✅</div>
+
+  </section>
+
+  <!-- RIGHT: details and status -->
+  <section class="right">
+    <div>
+      <div class="meta">
+        <div class="row"><div class="label">Дата / Время</div><div class="value">30.09.2025, 21:45</div></div>
+        <div class="row"><div class="label">Сектор</div><div class="value">21-Север</div></div>
+        <div class="row"><div class="label">Ряд</div><div class="value">5</div></div>
+        <div class="row"><div class="label">Место</div><div class="value">15</div></div>
+        <div class="row"><div class="label">Тип билета</div><div class="value">Обычный</div></div>
+      </div>
+
+      <div class="seat" aria-hidden>
+        <div class="pill"><div style="font-size:12px;color:var(--muted)">Сектор</div><div class="num">21-Север</div></div>
+        <div class="pill"><div style="font-size:12px;color:var(--muted)">Ряд</div><div class="num">5</div></div>
+        <div class="pill"><div style="font-size:12px;color:var(--muted)">Место</div><div class="num">15</div></div>
+      </div>
+
+      <div class="status-wrap">
+        <div class="status-badge" id="statusBadge">VALID</div>
+        <div class="status-desc">Статус билета — действителен. Пожалуйста, предъявите билет при входе.</div>
+      </div>
+
+      <div class="footer">
+        Вход с 18+ — иметь при себе документ, удостоверяющий личность. Билет может быть аннулирован при выявлении подделки.
+      </div>
+    </div>
+
+    <div style="display:flex;gap:12px;align-items:center;justify-content:flex-end">
+      <button id="printBtn" style="background:#0a2463;color:#fff;border:none;padding:10px 16px;border-radius:10px;cursor:pointer">Печать билета</button>
+      <button id="copyBtn" style="background:#eee;color:#111;border:none;padding:10px 14px;border-radius:10px;cursor:pointer">Копировать ID</button>
+    </div>
+  </section>
+
+</article>
+
   </div>
+
+  <script>
+    const ticket = {
+      id: 'TCK-KRM-21N-05-15-20250930',
+      match: 'Кайрат - Реал Мадрид',
+      date: '2025-09-30',
+      time: '21:45',
+      stadium: 'Центральный стадион, Алматы',
+      sector: '21-Север',
+      row: '5',
+      seat: '15',
+      type: 'Обычный',
+      status: 'VALID'
+    };
+
+    document.getElementById('tid').textContent = ticket.id;
+
+    const qrImg = document.getElementById('qrImage');
+    const verifyUrl = location.origin + location.pathname + '?id=' + encodeURIComponent(ticket.id);
+    const googleQR = 'https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=' + encodeURIComponent(verifyUrl) + '&chld=L|1';
+    qrImg.src = googleQR;
+    qrImg.onerror = function(){
+      qrImg.alt = ticket.id;
+      document.getElementById('qrContainer').textContent = ticket.id;
+    }
+
+    document.getElementById('printBtn').addEventListener('click', ()=>window.print());
+    document.getElementById('copyBtn').addEventListener('click', ()=>{
+      navigator.clipboard?.writeText(ticket.id).then(()=>{
+        alert('Ticket ID скопирован в буфер обмена');
+      }).catch(()=>{
+        prompt('Скопируйте вручную:', ticket.id);
+      })
+    });
+
+    const badge = document.getElementById('statusBadge');
+    if(ticket.status && ticket.status.toLowerCase() === 'valid'){
+      badge.style.background = 'linear-gradient(180deg,var(--green),#3da24a)';
+      badge.textContent = 'VALID';
+    } else {
+      badge.style.background = '#d32f2f';
+      badge.textContent = ticket.status || 'INVALID';
+    }
+  </script>
+
 </body>
 </html>
